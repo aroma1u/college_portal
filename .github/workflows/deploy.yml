@@ -26,7 +26,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/college_information_port:latest
+          tags: aroma1u/college_information_port:latest
 
   deploy:
     name: Deploy to AWS EC2
@@ -47,7 +47,7 @@ jobs:
             version: "3.8"
             services:
               app:
-                image: ${{ secrets.DOCKER_USERNAME }}/college_information_port:latest
+                image: aroma1u/college_information_port:latest
                 container_name: college-app
                 restart: unless-stopped
                 expose:
@@ -90,11 +90,11 @@ jobs:
             NGINXEOF
             
             # Pull image and restart containers
-            docker pull ${{ secrets.DOCKER_USERNAME }}/college_information_port:latest
+            docker pull aroma1u/college_information_port:latest
             cd ~/college_information_port
             
             # Export variable so docker compose uses the right image
-            export DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+            export DOCKER_USERNAME=aroma1u
             
             docker compose down || true
             docker compose up -d
